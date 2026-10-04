@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pink Circle | Best Friends</title>
+  <style>
+    :root {
+      --pink-50: #fff8fc;
+      --pink-100: #ffeaf4;
+      --pink-200: #ffd9eb;
+      --pink-300: #ffbfdc;
+      --pink-400: #ff9ec8;
+      --pink-500: #f86db0;
+      --pink-600: #de5a9d;
+      --pink-700: #c43f86;
+      --rose-900: #4b1d2e;
+      --text: #47273a;
+      --muted: #6d465b;
+      --white: #ffffff;
+      --shadow-soft: 0 18px 40px rgba(193, 81, 134, 0.18);
+      --shadow-strong: 0 28px 60px rgba(150, 62, 108, 0.18);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(255, 189, 219, 0.9), transparent 25%),
+        radial-gradient(circle at bottom right, rgba(255, 153, 197, 0.65), transparent 30%),
+        linear-gradient(180deg, #fff8fb 0%, #ffeef5 32%, #fff7fa 100%);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    button, input, textarea { font: inherit; }
+
+    .container {
+      width: min(1180px, calc(100% - 30px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(255, 248, 252, 0.72);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(205, 103, 161, 0.12);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 76px;
+      gap: 18px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--pink-700);
+      font-size: 0.86rem;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff9ec8, #d85795);
+      color: white;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: wrap;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .nav-links a {
+      opacity: 0.8;
+      transition: 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+      color: var(--pink-700);
+    }
+
+    .hero {
+      padding: 48px 0 22px;
+    }
+
+    .hero-box {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 30px;
+      align-items: center;
+      border-radius: 32px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.82), rgba(255, 230, 240, 0.82));
+      border: 1px solid rgba(219, 120, 170, 0.12);
+      box-shadow: var(--shadow-strong);
+      overflow: hidden;
+    }
+
+    .hero-copy {
+      padding: 56px 40px;
+    }
+
+    .mini-badge {
+      display: inline-block;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background: rgba(248, 109, 176, 0.14);
+      border: 1px solid rgba(248, 109, 176, 0.22);
+      color: #bd2d7d;
+      font-size: 0.76rem;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.8rem, 5vw, 6rem);
+      letter-spacing: -0.06em;
+      line-height: 0.95;
+      color: var(--rose-900);
+    }
+
+    .hero-copy p {
+      margin: 0;
+      max-width: 560px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+
+    .button,
+    .card-button,
+    .send-button,
+    .close-button {
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      font-weight: 800;
+    }
+
+    .button:hover,
+    .card-button:hover,
+    .send-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      background: linear-gradient(135deg, #ff8fc3, #d85795);
+      color: white;
+      padding: 15px 24px;
+      box-shadow: 0 16px 26px rgba(216, 87, 149, 0.25);
+    }
+
+    .button-secondary {
+      background: rgba(255,255,255,0.7);
+      color: var(--rose-900);
+      border: 1px solid rgba(191, 82, 141, 0.15);
+      padding: 15px 22px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(120px, 1fr));
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(202, 109, 163, 0.12);
+      border-radius: 18px;
+      padding: 18px 10px;
+      text-align: center;
+      box-shadow: 0 12px 26px rgba(196, 118, 159, 0.08);
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--pink-700);
+      font-size: 1.8rem;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 500px;
+      background: linear-gradient(180deg, rgba(255, 230, 240, 0.7), rgba(255, 255, 255, 0.5));
+    }
+
+    .bubble-wrap {
+      position: relative;
+      width: min(420px, 85%);
+      height: 420px;
+      margin: 40px auto 0;
+    }
+
+    .bubble {
+      position: absolute;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: white;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      box-shadow: var(--shadow-soft);
+      border: 10px solid rgba(255,255,255,0.8);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .bubble.b1 { width: 148px; height: 148px; left: 8%; top: 18%; background: linear-gradient(135deg,#ffc8e2,#ef8ebd); animation-delay: 0s; }
+    .bubble.b2 { width: 162px; height: 162px; right: 8%; top: 24%; background: linear-gradient(135deg,#ffb7d9,#d65c99); animation-delay: 1.2s; }
+    .bubble.b3 { width: 170px; height: 170px; left: 24%; bottom: 12%; background: linear-gradient(135deg,#ffcaea,#d85e98); animation-delay: 2.1s; }
+    .bubble.b4 { width: 150px; height: 150px; right: 18%; bottom: 18%; background: linear-gradient(135deg,#ffcfe9,#ea73b1); animation-delay: 1.5s; }
+
+    .bubble-center {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 150px;
+      height: 150px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff9dc6, #d2488a);
+      color: white;
+      font-size: 2rem;
+      font-weight: 900;
+      border: 10px solid rgba(255,255,255,0.82);
+      box-shadow: 0 24px 40px rgba(190, 75, 130, 0.2);
+      animation: pulse 4.5s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-16px); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.04); }
+    }
+
+    .search-area {
+      padding: 28px 0 8px;
+    }
+
+    .search-panel {
+      background: rgba(255,255,255,0.75);
+      border: 1px solid rgba(206, 109, 164, 0.15);
+      border-radius: 26px;
+      box-shadow: 0 18px 30px rgba(215, 103, 164, 0.08);
+      padding: 22px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .search-label {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--rose-900);
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1 1 420px;
+    }
+
+    .search-box input {
+      width: 100%;
+      height: 56px;
+      border-radius: 16px;
+      border: 1px solid rgba(201, 101, 157, 0.18);
+      background: var(--pink-50);
+      padding: 0 18px 0 50px;
+      font-size: 1rem;
+      color: var(--text);
+      outline: none;
+      transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .search-box input:focus {
+      border-color: rgba(216, 87, 149, 0.5);
+      box-shadow: 0 0 0 4px rgba(216, 87, 149, 0.08);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+      color: var(--pink-700);
+    }
+
+    .people {
+      padding: 30px 0 20px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-size: clamp(2.1rem, 3vw, 3.1rem);
+      letter-spacing: -0.05em;
+      color: var(--rose-900);
+    }
+
+    .section-header span {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(220px, 1fr));
+      gap: 22px;
+    }
+
+    .friend-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      min-height: 360px;
+      border-radius: 28px;
+      padding: 18px 18px 20px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(200, 104, 152, 0.12);
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      overflow: hidden;
+    }
+
+    .friend-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 110px;
+      background: linear-gradient(180deg, rgba(255, 203, 229, 0.72), rgba(255, 203, 229, 0));
+      pointer-events: none;
+    }
+
+    .friend-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 26px 42px rgba(211, 112, 172, 0.2);
+    }
+
+    .card-top {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      z-index: 1;
+    }
+
+    .tag {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.8);
+      border: 1px solid rgba(201, 101, 157, 0.15);
+      color: var(--pink-700);
+      font-weight: 800;
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .avatar {
+      position: relative;
+      z-index: 1;
+      width: 90px;
+      height: 90px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      margin: 14px auto 16px;
+      color: white;
+      font-size: 2rem;
+      font-weight: 900;
+      box-shadow: 0 18px 28px rgba(184, 29, 106, 0.17);
+      border: 8px solid rgba(255,255,255,0.8);
+    }
+
+    .friend-card h3 {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      font-size: 2rem;
+      letter-spacing: -0.04em;
+      color: var(--rose-900);
+    }
+
+    .meta {
+      position: relative;
+      z-index: 1;
+      margin-top: 4px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .bio {
+      position: relative;
+      z-index: 1;
+      margin: 14px 0 0;
+      color: rgba(71, 39, 58, 0.8);
+      font-weight: 500;
+      min-height: 86px;
+    }
+
+    .card-button {
+      position: relative;
+      z-index: 1;
+      margin-top: auto;
+      padding: 12px 18px;
+      background: linear-gradient(135deg, #ff98c9, #d9599a);
+      color: white;
+      box-shadow: 0 16px 28px rgba(188, 67, 128, 0.18);
+    }
+
+    .story {
+      padding: 28px 0 20px;
+    }
+
+    .story-box {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      background: linear-gradient(135deg, rgba(255, 239, 246, 0.9), rgba(255,255,255,0.8));
+      border: 1px solid rgba(205, 106, 163, 0.12);
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .story-copy {
+      padding: 42px 30px 34px;
+    }
+
+    .story-copy h3 {
+      margin: 0 0 16px;
+      font-size: clamp(2rem, 2.8vw, 3rem);
+      line-height: 1.05;
+      color: var(--rose-900);
+      letter-spacing: -0.05em;
+    }
+
+    .story-copy p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 1.06rem;
+    }
+
+    .quote-box {
+      position: relative;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(196, 116, 161, 0.1);
+      border-radius: 18px;
+      padding: 18px 18px 18px 44px;
+      color: var(--rose-900);
+      font-weight: 700;
+      font-style: italic;
+    }
+
+    .quote-box::before {
+      content: "“";
+      position: absolute;
+      left: 14px;
+      top: 6px;
+      font-size: 2.3rem;
+      color: var(--pink-500);
+    }
+
+    .story-graphic {
+      position: relative;
+      min-height: 280px;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at center, rgba(255, 202, 220, 0.8), rgba(255,255,255,0.54));
+    }
+
+    .heart {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      background: linear-gradient(135deg, #ff9bc9, #d85795);
+      transform: rotate(-45deg);
+      border-radius: 14px 0 14px 14px;
+      box-shadow: 0 24px 36px rgba(190, 75, 130, 0.18);
+    }
+
+    .heart::before, .heart::after {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: inherit;
+    }
+
+    .heart::before { top: -75px; left: 0; }
+    .heart::after { left: 75px; top: 0; }
+
+    .feedback {
+      padding: 28px 0 46px;
+    }
+
+    .feedback-box {
+      background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255, 233, 242, 0.8));
+      border: 1px solid rgba(205, 106, 163, 0.12);
+      border-radius: 30px;
+      box-shadow: var(--shadow-soft);
+      padding: 30px 22px 26px;
+    }
+
+    .feedback-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .feedback-header h3 {
+      margin: 0;
+      font-size: clamp(2rem, 2.8vw, 3rem);
+      letter-spacing: -0.05em;
+      color: var(--rose-900);
+    }
+
+    .feedback-header span {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .feedback-form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      color: var(--rose-900);
+      font-weight: 700;
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid rgba(201, 101, 157, 0.18);
+      background: rgba(255,255,255,0.8);
+      padding: 14px 16px;
+      color: var(--text);
+      outline: none;
+      resize: vertical;
+      transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+      border-color: rgba(216, 87, 149, 0.55);
+      box-shadow: 0 0 0 4px rgba(216, 87, 149, 0.08);
+    }
+
+    .field textarea {
+      min-height: 150px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .send-button {
+      justify-self: start;
+      background: linear-gradient(135deg, #ff8fc3, #d85795);
+      color: white;
+      padding: 14px 22px;
+      box-shadow: 0 16px 28px rgba(216, 87, 149, 0.22);
+    }
+
+    .thanks {
+      margin-top: 18px;
+      min-height: 26px;
+      color: var(--pink-700);
+      font-weight: 800;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: rgba(38, 19, 30, 0.52);
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+      padding: 18px;
+    }
+
+    .modal.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-card {
+      position: relative;
+      width: min(660px, 100%);
+      background: linear-gradient(135deg, #fff8fb, #ffeef5);
+      border: 1px solid rgba(200, 104, 152, 0.15);
+      border-radius: 30px;
+      padding: 26px 24px 18px;
+      box-shadow: 0 28px 56px rgba(41, 17, 31, 0.18);
+      transform: translateY(12px);
+      transition: transform 0.25s ease;
+    }
+
+    .modal.visible .modal-card {
+      transform: translateY(0);
+    }
+
+    .close-button {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.8);
+      border: 1px solid rgba(201, 101, 157, 0.12);
+      color: var(--pink-700);
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding-right: 46px;
+      margin-bottom: 18px;
+    }
+
+    .modal-avatar {
+      width: 108px;
+      height: 108px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: white;
+      font-size: 2.1rem;
+      font-weight: 900;
+      border: 8px solid rgba(255,255,255,0.8);
+      box-shadow: 0 18px 30px rgba(184, 29, 106, 0.18);
+      background: linear-gradient(135deg, #ff9ec8, #d85795);
+    }
+
+    .modal-name {
+      margin: 0;
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      letter-spacing: -0.05em;
+      color: var(--rose-900);
+    }
+
+    .modal-meta {
+      margin-top: 6px;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .modal-info {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(180px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .info-box {
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(201, 101, 157, 0.14);
+      border-radius: 18px;
+      padding: 14px 16px;
+    }
+
+    .info-box strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--pink-700);
+    }
+
+    .info-box span {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .modal-bio {
+      margin: 0;
+      color: rgba(71, 39, 58, 0.85);
+      font-size: 1.02rem;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-weight: 700;
+      padding: 10px 0 32px;
+    }
+
+    @media (max-width: 980px) {
+      .hero-box,
+      .story-box {
+        grid-template-columns: 1fr;
+      }
+
+      .cards-grid {
+        grid-template-columns: repeat(2, minmax(220px, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        flex-direction: column;
+        justify-content: center;
+        padding: 12px 0;
+      }
+
+      .nav-links {
+        justify-content: center;
+      }
+
+      .hero-copy {
+        padding: 34px 20px;
+      }
+
+      .cards-grid,
+      .feedback-form,
+      .modal-info {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: repeat(3, minmax(90px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <div class="brand">
+        <span class="brand-mark">♥</span>
+        <span>Pink Circle</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#friendship">Friendship</a>
+        <a href="#feedback">Feedback</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="container hero-box">
+        <div class="hero-copy">
+          <div class="mini-badge">Class 9 • Besties</div>
+          <h1>Our friendship is a pink dream.</h1>
+          <p>
+            This is our story — a group of four beautiful girls, Arisha, Sharika, Anisa, and Saba,
+            sharing laughter, comfort, dreams, and unforgettable memories. We are not just friends,
+            we are each other’s safe place, joy, and forever cheerleaders.
+          </p>
+
+          <div class="hero-actions">
+            <button class="button button-primary" onclick="document.getElementById('friendship').scrollIntoView({behavior:'smooth'})">Meet Our Girls</button>
+            <button class="button button-secondary" onclick="document.getElementById('feedback').scrollIntoView({behavior:'smooth'})">Share Feedback</button>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <strong>4</strong>
+              <span>Beautiful hearts</span>
+            </div>
+            <div class="stat">
+              <strong>1</strong>
+              <span>Best bond</span>
+            </div>
+            <div class="stat">
+              <strong>∞</strong>
+              <span>Lovely memories</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="bubble-wrap">
+            <div class="bubble b1">Arisha</div>
+            <div class="bubble b2">Sharika</div>
+            <div class="bubble b3">Anisa</div>
+            <div class="bubble b4">Saba</div>
+            <div class="bubble-center">4</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="search-area">
+      <div class="container">
+        <div class="search-panel">
+          <div class="search-label">Find a friend</div>
+          <div class="search-box">
+            <span class="search-icon">⌕</span>
+            <input id="searchInput" type="text" placeholder="Search by name or vibe..." />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="friendship" class="people">
+      <div class="container">
+        <div class="section-header">
+          <h2>Our Circle</h2>
+          <span>Click any card to know more</span>
+        </div>
+
+        <div class="cards-grid" id="cardsGrid"></div>
+      </div>
+    </section>
+
+    <section class="story">
+      <div class="container">
+        <div class="story-box">
+          <div class="story-copy">
+            <h3>Our friendship is bright, warm, and unforgettable.</h3>
+            <p>
+              The best part of being together is how naturally we support one another. We share all the small things—inside jokes,
+              study sessions, secret plans, and sweet moments that turn into stories we will remember forever.
+            </p>
+            <p>
+              From class notes to laughter after school, every memory feels special when we are together. This bond is full of kindness,
+              trust, and girl-power energy that makes life extra colorful.
+            </p>
+            <div class="quote-box">
+              “True friendship feels like a safe hug in the middle of a busy day.”
+            </div>
+          </div>
+
+          <div class="story-graphic">
+            <div class="heart"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="feedback" class="feedback">
+      <div class="container">
+        <div class="feedback-box">
+          <div class="feedback-header">
+            <h3>Feedback</h3>
+            <span>Tell us what you feel</span>
+          </div>
+
+          <form class="feedback-form" id="feedbackForm">
+            <div class="field">
+              <label for="name">Your Name</label>
+              <input id="name" type="text" placeholder="Enter your name" required />
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" type="email" placeholder="Enter your email" required />
+            </div>
+
+            <div class="field full">
+              <label for="message">Your Message</label>
+              <textarea id="message" placeholder="Write your sweet feedback here..." required></textarea>
+            </div>
+
+            <button type="submit" class="send-button">Send Feedback</button>
+          </form>
+
+          <div class="thanks" id="thanksMessage"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>Made with love for our pink friendship ✨</footer>
+
+  <div class="modal" id="friendModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="close-button" aria-label="Close">×</button>
+
+      <div class="modal-header">
+        <div class="modal-avatar" id="modalAvatar">A</div>
+        <div>
+          <h2 class="modal-name" id="modalName">Arisha</h2>
+          <div class="modal-meta" id="modalMeta">Class 9 • Happy soul</div>
+        </div>
+      </div>
+
+      <div class="modal-info">
+        <div class="info-box">
+          <strong>Favorite Subject</strong>
+          <span id="modalSubject">Art</span>
+        </div>
+        <div class="info-box">
+          <strong>Hobby</strong>
+          <span id="modalHobby">Drawing</span>
+        </div>
+        <div class="info-box">
+          <strong>Dream</strong>
+          <span id="modalDream">Designer</span>
+        </div>
+        <div class="info-box">
+          <strong>Vibe</strong>
+          <span id="modalVibe">Sweet & calm</span>
+        </div>
+      </div>
+
+      <p id="modalBio" class="modal-bio"></p>
+    </div>
+  </div>
+
+  <script>
+    const friends = {
+      Arisha: {
+        initials: 'A',
+        tag: 'Creative',
+        color: 'linear-gradient(135deg,#ffc4dc,#ef8ec3)',
+        meta: 'Class 9 • Happy soul',
+        subject: 'Art',
+        hobby: 'Drawing',
+        dream: 'Designer',
+        vibe: 'Sweet & bright',
+        bio: 'Arisha is full of imagination and positive energy. She brings color to every moment and is the kind of person who turns ordinary days into beautiful memories.'
+      },
+      Sharika: {
+        initials: 'S',
+        tag: 'Cheerful',
+        color: 'linear-gradient(135deg,#ffbfdf,#ef6fb2)',
+        meta: 'Class 9 • Sparkling smile',
+        subject: 'English',
+        hobby: 'Reading stories',
+        dream: 'Writer',
+        vibe: 'Sunny & fun',
+        bio: 'Sharika has a joyful personality and the kind of laugh that instantly brightens the room. She is caring, lively, and full of creative thoughts.'
+      },
+      Anisa: {
+        initials: 'N',
+        tag: 'Calm',
+        color: 'linear-gradient(135deg,#ffcde5,#d4629f)',
+        meta: 'Class 9 • Gentle heart',
+        subject: 'Biology',
+        hobby: 'Helping others',
+        dream: 'Doctor',
+        vibe: 'Gentle & strong',
+        bio: 'Anisa is thoughtful, kind, and deeply caring. She always listens, supports, and makes everyone feel safe and understood.'
+      },
+      Saba: {
+        initials: 'B',
+        tag: 'Confident',
+        color: 'linear-gradient(135deg,#ffcced,#e976b6)',
+        meta: 'Class 9 • Bold energy',
+        subject: 'Math',
+        hobby: 'Dancing',
+        dream: 'Teacher',
+        vibe: 'Bold & fearless',
+        bio: 'Saba brings confidence and fun wherever she goes. She is energetic, brave, and full of spirit, making every moment with her unforgettable.'
+      }
+    };
+
+    const cardsGrid = document.getElementById('cardsGrid');
+    const searchInput = document.getElementById('searchInput');
+    const modal = document.getElementById('friendModal');
+    const closeButton = document.querySelector('.close-button');
+    const feedbackForm = document.getElementById('feedbackForm');
+    const thanksMessage = document.getElementById('thanksMessage');
+
+    function renderCards(items) {
+      cardsGrid.innerHTML = items.map((name) => {
+        const friend = friends[name];
+        return `
+          <article class="friend-card" data-name="${name}" tabindex="0">
+            <div class="card-top">
+              <span class="tag">${friend.tag}</span>
+            </div>
+            <div class="avatar" style="background:${friend.color}">${friend.initials}</div>
+            <h3>${name}</h3>
+            <div class="meta">${friend.meta}</div>
+            <p class="bio">${name} adds sweetness, laughter, and a warm heart to our special circle of friendship.</p>
+            <button class="card-button">View Profile</button>
+          </article>
+        `;
+      }).join('');
+
+      bindCardEvents();
+    }
+
+    function filterCards() {
+      const value = searchInput.value.trim().toLowerCase();
+      if (!value) {
+        renderCards(Object.keys(friends));
+        return;
+      }
+
+      const filtered = Object.keys(friends).filter((name) => {
+        const friend = friends[name];
+        return (
+          name.toLowerCase().includes(value) ||
+          friend.tag.toLowerCase().includes(value) ||
+          friend.vibe.toLowerCase().includes(value)
+        );
+      });
+
+      if (!filtered.length) {
+        cardsGrid.innerHTML = `
+          <div style="grid-column:1/-1; background:rgba(255,255,255,0.7); border:1px solid rgba(201, 101, 157, 0.12); border-radius:22px; padding:26px; text-align:center; color:#47273a; font-weight:800;">
+            No result found. Try Arisha, Sharika, Anisa, or Saba.
+          </div>
+        `;
+        return;
+      }
+
+      renderCards(filtered);
+    }
+
+    function bindCardEvents() {
+      document.querySelectorAll('.friend-card').forEach((card) => {
+        const open = () => openModal(card.dataset.name);
+        card.addEventListener('click', open);
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            open();
+          }
+        });
+      });
+    }
+
+    function openModal(name) {
+      const friend = friends[name];
+      document.getElementById('modalAvatar').textContent = friend.initials;
+      document.getElementById('modalAvatar').style.background = friend.color;
+      document.getElementById('modalName').textContent = name;
+      document.getElementById('modalMeta').textContent = friend.meta;
+      document.getElementById('modalSubject').textContent = friend.subject;
+      document.getElementById('modalHobby').textContent = friend.hobby;
+      document.getElementById('modalDream').textContent = friend.dream;
+      document.getElementById('modalVibe').textContent = friend.vibe;
+      document.getElementById('modalBio').textContent = friend.bio;
+      modal.classList.add('visible');
+      modal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeModal() {
+      modal.classList.remove('visible');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+
+    searchInput.addEventListener('input', filterCards);
+    closeButton.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('visible')) closeModal();
+    });
+
+    feedbackForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if (!name || !message) {
+        thanksMessage.textContent = 'Please fill in your name and message.';
+        return;
+      }
+
+      thanksMessage.textContent = `Thank you, ${name}! Your feedback is so appreciated. 💖`;
+      feedbackForm.reset();
+    });
+
+    renderCards(Object.keys(friends));
+  </script>
+</body>
+</html>
